@@ -1,0 +1,25 @@
+schema {
+    query:Query,
+    mutation:Mutation
+}
+
+type User{
+    _id: ID!
+    name: String!
+    score: Int!
+    
+}
+
+type Query{
+    users: [User!]!
+    user(_id: ID!): User
+    userByName(name:String!):User
+}
+
+type Mutation{
+    createUser(name: String!, score: Int!) : User
+    updateScoreUser(_id: ID!, score: Int!): User
+    deleteUser(_id: ID!): User
+    updateScoreUserByName(name:String!, score: Int!):User
+    
+}
