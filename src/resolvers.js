@@ -2,17 +2,36 @@ const User = require('./Models/User');
 
 module.exports ={
     Query:{
-        users:()=> User.find(),
+        users:()=> User.find().sort('-score'),
         user:(_, { _id })=> User.findById(_id),
         userByName:(_,{name}) => User.findOne({name})
      
     },
 
     Mutation:{
-        createUser:(_, { name, score })=> User.create({name, score}),
-        updateScoreUser:(_,{ _id, score})=> User.findByIdAndUpdate({_id},{score},{new:true}),
-        deleteUser:(_,{_id})=> User.findByIdAndRemove({_id}),
-        updateScoreUserByName:(_,{name, score})=>User.findOneAndUpdate({name},{score},{new:true})     
+      
+        createUser: async (_,{name, score})=>{
+
+            let user = await User.findOne({name})
+                if(!user){
+
+                   return await User.create({name,score})
+                 }
+             return user; 
+
+        },
+
+        updateScoreUserByName: async (_,{name, score})=>{
+            let user = await User.findOne({name})
+                if(user.score < score){
+                    user.score=score;
+                        await user.save();
+                            return user;
+                }
+            return user;
+        },
+
+        deleteUser:(_,{_id})=> User.findByIdAndRemove({_id})
     }
 
    

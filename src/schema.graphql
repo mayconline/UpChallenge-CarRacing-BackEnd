@@ -17,9 +17,7 @@ type Query{
 }
 
 type Mutation{
-    createUser(name: String!, score: Int!) : User
-    updateScoreUser(_id: ID!, score: Int!): User
-    deleteUser(_id: ID!): User
-    updateScoreUserByName(name:String!, score: Int!):User
-    
+    createUser(name: String!, score: Int!) : User  
+    updateScoreUserByName(name:String, score: Int):User
+    deleteUser(_id: ID!): Boolean
 }
