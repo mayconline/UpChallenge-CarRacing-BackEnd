@@ -10,19 +10,22 @@ module.exports ={
 
     Mutation:{
       
-        createUser: async (_,{name, score})=>{
+        createUser: async (_,{name})=>{
+            let nickname = name.toLowerCase();
 
-            let user = await User.findOne({name})
+            let user = await User.findOne({name:nickname})
                 if(!user){
 
-                   return await User.create({name,score})
+                   return await User.create({name:nickname,score:0})
                  }
              return user; 
 
         },
 
         updateScoreUserByName: async (_,{name, score})=>{
-            let user = await User.findOne({name})
+            let nickname = name.toLowerCase();
+
+            let user = await User.findOne({name:nickname})
                 if(user.score < score){
                     user.score=score;
                         await user.save();

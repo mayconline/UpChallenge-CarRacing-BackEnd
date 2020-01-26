@@ -20,7 +20,7 @@ const options = {
     playground: '/playground',
     cors:{
         credentials: true,
-        origin: ["*"]
+        origin: '*'
     }
    
 }
