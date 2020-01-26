@@ -18,6 +18,6 @@ type Query{
 
 type Mutation{
     createUser(name: String!) : User  
-    updateScoreUserByName(name:String, score: Int):User
+    updateScoreUserByName(name:String!, score: Int!):User
     deleteUser(_id: ID!): Boolean
 }
